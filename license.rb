@@ -10,10 +10,10 @@ class License
 
   attr_accessor :paid_till, :max_version, :min_version
 
-  def to_s
-    "license info:\n" \
-    "paid till: #{@paid_till}\n" \
-    "max_vers: #{@max_version}\n" \
-    "min_vers: #{@min_version}\n"
-  end
+  #  def to_s
+  #    "license info:\n" \
+  #    "paid till: #{@paid_till}\n" \
+  #    "max_vers: #{@max_version}\n" \
+  #    "min_vers: #{@min_version}\n"
+  #  end
 end

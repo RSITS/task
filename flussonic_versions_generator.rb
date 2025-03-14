@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-def generate_versions_arr(current_date)
+def generate_versions_arr(current_date, num)
   formated_cd = "#{current_date.year % 100}.#{format('%02d', current_date.month)}"
-  make_last_vers([formated_cd])
+  last_flussonic_vers = [formated_cd]
+  year, month = last_flussonic_vers.last.split('.').map(&:to_i)
+  make_last_vers(last_flussonic_vers, num, year, month)
 end
 
-def make_last_vers(last_flussonic_vers)
-  year, month = last_flussonic_vers.last.split('.').map(&:to_i)
-  9.times do
-    # он ругается на 11>10 строчек, но когда я сворачиваю if в тернарник, vsкодовский rubocop его разворачивает назад
-    # month == 1 ? (year -= 1, month = 12) : month -= 1
+def make_last_vers(last_flussonic_vers, num, year, month)
+  (num - 1).times do
     if month == 1
       year -= 1
       month = 12
