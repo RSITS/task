@@ -4,15 +4,10 @@ require_relative 'version'
 
 # this class contain info about license
 class License
-  def initialize
-    puts 'enter paid_till yyyy-mm-dd'
-    @paid_till = Version.new(Version.read_version_in_date_format)
-
-    puts 'enter max_version yy.mm or just press enter and skip'
-    @max_version = Version.new(Version.read_version)
-
-    puts 'enter min_version yy.mm or just press enter and skip'
-    @min_version = Version.new(Version.read_version)
+  def initialize(paid_till = nil, max_version = nil, min_version = nil)
+    @paid_till = paid_till
+    @max_version = max_version
+    @min_version = min_version
   end
 
   attr_accessor :paid_till, :max_version, :min_version
@@ -24,16 +19,18 @@ class License
     "min_vers: #{@min_version}\n"
   end
 
-  def self.make_license
-    license = License.new
-    license.read_versions
-    license
-  rescue ArgumentError => e
-    puts "please correct this #{e.message}"
-    retry
+  def make_license
+    puts 'enter paid_till yyyy-mm-dd'
+    @paid_till = Version.new(Version.read_version_in_date_format)
+
+    puts 'enter max_version yy.mm or just press enter and skip'
+    @max_version = Version.new(Version.read_version)
+
+    puts 'enter min_version yy.mm or just press enter and skip'
+    @min_version = Version.new(Version.read_version)
   end
 
-  def available_vers(flussonic_versions)
+  def available_versions(flussonic_versions)
     available_vers = flussonic_versions.select do |version|
       Version.compare_vers(version, @paid_till) <= 0 &&
         (@max_version.date.nil? || Version.compare_vers(version, @max_version) <= 0) &&

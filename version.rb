@@ -2,7 +2,7 @@
 
 # this class contain version implementation
 class Version
-  def initialize(date)
+  def initialize(date = nil)
     @date = date
   end
 
