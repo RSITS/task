@@ -6,6 +6,6 @@ puts 'Available licenses finder'
 
 loop do
   Interface.interface
-  print 'Repeat? [y/n]: '
+  print 'Press y to repeat: '
   break unless gets.strip.eql?('y')
 end
