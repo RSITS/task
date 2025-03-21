@@ -12,17 +12,6 @@ class Version
     @date
   end
 
-  def self.read_version
-    version = gets.chomp
-    valid_input?(version) unless version.empty?
-    version.empty? ? nil : version
-  end
-
-  def self.read_version_in_date_format
-    version = Date.parse(gets.chomp)
-    "#{version.year % 100}.#{format('%02d', version.month)}"
-  end
-
   def self.compare_vers(version1, version2)
     v1 = version1.date.split('.').map(&:to_i)
     v2 = version2.date.split('.').map(&:to_i)
@@ -38,7 +27,7 @@ class Version
     "#{date.year % 100}.#{format('%02d', date.month)}"
   end
 
-  def self.valid_input?(version)
+  def self.input_validation(version)
     raise ArgumentError, 'invalid version' unless version.match?(/^\d{2}\.\d{2}$/)
   end
 end

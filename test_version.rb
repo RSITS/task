@@ -28,7 +28,7 @@ class TestVersion < Minitest::Test
     assert_equal '25.10', result
   end
 
-  def test_valid_input
-    assert_raises(ArgumentError, 'invalid version') { Version.valid_input?('25-11') }
+  def test_input_validation
+    assert_raises(ArgumentError, 'invalid version') { Version.input_validation('25-11') }
   end
 end

@@ -48,4 +48,26 @@ class TestLicense < Minitest::Test
     expected = ['25.07']
     assert_equal expected, available
   end
+
+  def test_available_versions_max_greater_than_max_available
+    paid_till = Version.new('25.08')
+    max_version = Version.new('25.12')
+    min_version = Version.new('25.01')
+    license = License.new(paid_till, max_version, min_version)
+    flussonic_versions = [Version.new('25.06'), Version.new('25.07'), Version.new('25.08'), Version.new('25.09')]
+    available = license.available_versions(flussonic_versions)
+    expected = ['25.06', '25.07', '25.08']
+    assert_equal expected, available.map(&:date)
+  end
+
+  def test_available_versions_with_zero_last
+    paid_till = Version.new('25.08')
+    max_version = Version.new('25.07')
+    min_version = Version.new('25.03')
+    license = License.new(paid_till, max_version, min_version)
+    flussonic_versions = []
+    available = license.available_versions(flussonic_versions)
+    expected = ['25.07']
+    assert_equal expected, available
+  end
 end

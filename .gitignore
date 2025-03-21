@@ -1,4 +1,4 @@
-*.md
+markdowns.md
 *.gem
 *.rbc
 /.config
