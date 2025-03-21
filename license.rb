@@ -19,17 +19,6 @@ class License
     "min_vers: #{@min_version}\n"
   end
 
-  def make_license
-    puts 'enter paid_till yyyy-mm-dd'
-    @paid_till = Version.new(Version.read_version_in_date_format)
-
-    puts 'enter max_version yy.mm or just press enter and skip'
-    @max_version = Version.new(Version.read_version)
-
-    puts 'enter min_version yy.mm or just press enter and skip'
-    @min_version = Version.new(Version.read_version)
-  end
-
   def available_versions(flussonic_versions)
     available_vers = flussonic_versions.select do |version|
       Version.compare_vers(version, @paid_till) <= 0 &&

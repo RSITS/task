@@ -42,4 +42,24 @@ class TestVersionsGenerator < Minitest::Test
 
     assert_equal expected, result.map(&:date)
   end
+
+  def test_make_one_date_version
+    current_date = Date.new(2025, 10, 1)
+    num = 1
+
+    result = VersionsGenerator.generate_versions(current_date, num)
+    expected = ['25.10']
+
+    assert_equal expected, result.map(&:date)
+  end
+
+  def test_make_no_versions
+    current_date = Date.new(2025, 10, 1)
+    num = 0
+
+    result = VersionsGenerator.generate_versions(current_date, num)
+    expected = []
+
+    assert_equal expected, result.map(&:date)
+  end
 end
